@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,19 +13,26 @@ namespace coffeApp
 {
     public partial class Form2: Form
     {
-    // @Arda24
+
+        //@ARDA24
 
         //Para 
-        int money = 1000;
+        public int money = 1000;
 
+       
+
+        public void UpdateMoneyLabel()
+        {
+            moneyLabel.Text = money.ToString() + "TL";
+        }
 
         // Fiyat Listesi
         int cheese = 150;
         int cupcake = 200;
         int hamburger = 250;
-        int pizza = 300;
-        int hotdog = 70;
-        int pancake = 50;
+        int pizza = 250;
+        int hotdog = 100;
+        int pancake = 100;
 
 
 
@@ -161,10 +168,11 @@ namespace coffeApp
             MessageBox.Show("Yeni siparişe başlandı. Liste Temizlendi..", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void moneyAddButton_Click(object sender, EventArgs e)
+        public void moneyAddButton_Click(object sender, EventArgs e)
         {
-            Form3 form = new Form3();
-            form.Show();
+            bakiyePanel panel = new bakiyePanel(this); 
+            panel.Show();
         }
     }
+
 }
