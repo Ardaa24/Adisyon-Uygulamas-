@@ -18,7 +18,7 @@ namespace coffeApp
 
         //Para 
         public int money = 1000;
-
+        public int lastPaidAmount = 0;
        
 
         public void UpdateMoneyLabel()
@@ -33,8 +33,17 @@ namespace coffeApp
         int pizza = 250;
         int hotdog = 100;
         int pancake = 100;
+        int kahve = 50;
+        int patates = 125;
+        int tavuksis = 200;
+        int eriste = 150;
+        int balik = 250;
+        int biftek = 550;
+        int izgara = 200;
 
-
+        /// <summary>
+        /// ///////////////
+        /// </summary>
 
         // KASA
 
@@ -90,26 +99,68 @@ namespace coffeApp
             cardListbox.Items.Add("Karışık Pizza");
         }
 
+        private void kahvePicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += kahve;
+            cardListbox.Items.Add("Kahve");
+        }
+
+        private void patatesPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += patates;
+            cardListbox.Items.Add("Elma Patates");
+        }
+
+        private void tavuksisPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += tavuksis;
+            cardListbox.Items.Add("Tavuk Şiş");
+        }
+
+        private void eristePicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += eriste;
+            cardListbox.Items.Add("Erişte");
+        }
+
+        private void balikPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += balik;
+            cardListbox.Items.Add("Sardalya");
+        }
+
+        private void biftekPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += biftek;
+            cardListbox.Items.Add("Biftek");
+        }
+
+        private void izgaraPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += izgara;
+            cardListbox.Items.Add("Izgara Tavuk");
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void payButton_Click(object sender, EventArgs e)
         {
             if (totalPrice <= money)
             {
-                // işlem
-                money = money - totalPrice;
-
-                // yazdır
-                moneyLabel.Text = money.ToString() + "TL";
-
-                // sepeti temizle
+                money -= totalPrice;
+                lastPaidAmount = totalPrice; 
+                UpdateMoneyLabel();
                 cardListbox.Items.Clear();
                 totalPrice = 0;
 
-                // bilgi
                 MessageBox.Show("Ödeme Başarılı", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                // bilgi
                 MessageBox.Show("Yetersiz Bakiye", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -118,6 +169,12 @@ namespace coffeApp
 
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cardListbox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (cardListbox.SelectedItem != null)
@@ -137,6 +194,23 @@ namespace coffeApp
                     totalPrice -= hamburger;
                 else if (selectedItem == "Karışık Pizza")
                     totalPrice -= pizza;
+                else if (selectedItem == "Kahve")
+                    totalPrice -= kahve;
+                else if (selectedItem == "Elma Patates")
+                    totalPrice -= patates;
+                else if (selectedItem == "Tavuk Şiş")
+                    totalPrice -= tavuksis;
+                else if (selectedItem == "Erişte")
+                    totalPrice -= eriste;
+                else if (selectedItem == "Sardalya")
+                    totalPrice -= balik;
+                else if (selectedItem == "Biftek")
+                    totalPrice -= biftek;
+                else if (selectedItem == "Izgara Tavuk")
+                    totalPrice -= izgara;
+
+
+                // Toplam fiyatı güncelle
 
                 // Öğeyi listeden sil
                 cardListbox.Items.Remove(selectedItem);
@@ -145,7 +219,8 @@ namespace coffeApp
 
 
 
-
+       //kapat buttonu
+        /// <param name="e"></param>
         private void offButton_Click(object sender, EventArgs e)
         {
             Close();
@@ -168,10 +243,25 @@ namespace coffeApp
             MessageBox.Show("Yeni siparişe başlandı. Liste Temizlendi..", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        // Bakiye Ekleme Butonu
         public void moneyAddButton_Click(object sender, EventArgs e)
         {
             bakiyePanel panel = new bakiyePanel(this); 
             panel.Show();
+        }
+
+
+        /// Son Adisyon
+        private void sonAdisyonButton_Click(object sender, EventArgs e)
+        {
+            if (lastPaidAmount > 0)
+            {
+                MessageBox.Show("Son ödeme tutarı: " + lastPaidAmount.ToString() + " TL", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Henüz bir ödeme yapılmadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 
