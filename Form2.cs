@@ -26,7 +26,8 @@ namespace coffeApp
             moneyLabel.Text = money.ToString() + "TL";
         }
 
-        // Fiyat Listesi
+        // Fiyat Listesi & Ürün Listesi
+
         int cheese = 150;
         int cupcake = 200;
         int hamburger = 250;
@@ -40,10 +41,11 @@ namespace coffeApp
         int balik = 250;
         int biftek = 550;
         int izgara = 200;
-
-        /// <summary>
+        int mesrubat = 60;
+        
         /// ///////////////
-        /// </summary>
+       
+
 
         // KASA
 
@@ -140,13 +142,15 @@ namespace coffeApp
             totalPrice += izgara;
             cardListbox.Items.Add("Izgara Tavuk");
         }
+        private void mesrubatPicturebox_Click(object sender, EventArgs e)
+        {
+            totalPrice += mesrubat;
+            cardListbox.Items.Add("Mesrubat");
+        }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// 24
+
         private void payButton_Click(object sender, EventArgs e)
         {
             if (totalPrice <= money)
@@ -208,7 +212,8 @@ namespace coffeApp
                     totalPrice -= biftek;
                 else if (selectedItem == "Izgara Tavuk")
                     totalPrice -= izgara;
-
+                else if (selectedItem == "Mesrubat")
+                    totalPrice -= mesrubat;
 
                 // Toplam fiyatı güncelle
 
@@ -220,7 +225,7 @@ namespace coffeApp
 
 
        //kapat buttonu
-        /// <param name="e"></param>
+       
         private void offButton_Click(object sender, EventArgs e)
         {
             Close();
@@ -229,17 +234,17 @@ namespace coffeApp
         private void newCheck_Click(object sender, EventArgs e)
         {
 
-            // Öğeleri temizle
+            // temizle
             cardListbox.Items.Clear();
 
             // Toplam fiyatı sıfırla
             totalPrice = 0;
 
-            // Bakiyeyi yeniden 1000 yap
+            // Bakiyeyi yeniden 1000 
             money = 1000;
             moneyLabel.Text = money.ToString() + "TL";
 
-            // (İsteğe bağlı bilgi mesajı)
+            // Adisyon mesajı
             MessageBox.Show("Yeni siparişe başlandı. Liste Temizlendi..", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -263,6 +268,8 @@ namespace coffeApp
                 MessageBox.Show("Henüz bir ödeme yapılmadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+      
     }
 
 }
